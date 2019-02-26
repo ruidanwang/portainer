@@ -36,6 +36,8 @@ css:
 angular:
   - 'angular/angular.js'
   - 'angular-ui-bootstrap/dist/ui-bootstrap-tpls.js'
+  - 'angular-translate/dist/angular-translate.js'
+  - 'angular-translate-loader-static-files/angular-translate-loader-static-files.js'
   - 'ui-select/dist/select.js'
   - 'angular-cookies/angular-cookies.js'
   - 'angular-google-analytics/dist/angular-google-analytics.js'
