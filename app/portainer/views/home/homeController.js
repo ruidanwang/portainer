@@ -2,6 +2,7 @@ angular.module('portainer.app')
 .controller('HomeController', ['$q', '$scope', '$state', 'Authentication', 'EndpointService', 'EndpointHelper', 'GroupService', 'Notifications', 'EndpointProvider', 'StateManager', 'LegacyExtensionManager', 'ModalService', 'MotdService', 'SystemService',
 function ($q, $scope, $state, Authentication, EndpointService, EndpointHelper, GroupService, Notifications, EndpointProvider, StateManager, LegacyExtensionManager, ModalService, MotdService, SystemService) {
 
+
   $scope.goToEdit = function(id) {
     $state.go('portainer.endpoints.endpoint', { id: id });
   };
@@ -112,6 +113,7 @@ function ($q, $scope, $state, Authentication, EndpointService, EndpointHelper, G
   }
 
   function initView() {
+
     $scope.isAdmin = Authentication.getUserDetails().role === 1;
 
     MotdService.motd()
@@ -136,4 +138,39 @@ function ($q, $scope, $state, Authentication, EndpointService, EndpointHelper, G
   }
 
   initView();
+}]).config(['$translateProvider',function($translateProvider){
+  $translateProvider.translations('en',{
+    'TITLE':'Hello'
+  });
+
+  $translateProvider.translations('zh',{
+    'TITLE':'主页'
+  });
+
+  $translateProvider.preferredLanguage('zh');
 }]);
+/*
+.config(['$translateProvider',function($translateProvider){
+  $translateProvider.translations('en',{
+    'TITLE':'Hello',
+    'FOO':'This is a paragraph'
+  });
+
+  $translateProvider.translations('zh',{
+    'TITLE':'主页',
+    'FOO':'这是一幅图'
+  });
+
+  $translateProvider.preferredLanguage('zh');
+}])*/
+/*
+.config(['$translateProvider',function($translateProvider){
+  var lang = window.localStorage.lang||'cn';
+
+  $translateProvider.preferredLanguage(lang);
+  $translateProvider.useStaticFilesLoader({
+    prefix: '/i18n/',
+    suffix: '.json'
+  });
+
+}])*/
