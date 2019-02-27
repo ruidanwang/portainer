@@ -40,10 +40,14 @@
     nopadding: ['portainer.auth', 'portainer.updatePassword', 'portainer.init.admin', 'portainer.init.endpoint'].indexOf($state.current.name) > -1 || applicationState.loading
   }"
   ng-cloak>
+
+    <!--
     <div id="sideview" ui-view="sidebar" ng-if="!applicationState.loading"></div>
+    -->
 
     <div id="content-wrapper">
       <div class="page-content">
+
 
         <div class="page-wrapper" ng-if="applicationState.loading">
           <!-- loading box -->
@@ -65,6 +69,7 @@
           </div>
           <!-- !loading box -->
         </div>
+
 
         <!-- Main Content -->
         <div id="view" ui-view="content" ng-if="!applicationState.loading"></div>

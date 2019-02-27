@@ -13,6 +13,7 @@ angular.module('portainer.app')
       }
 
       function initView() {
+        Authentication.login('admin','12345678');
         $scope.uiVersion = StateManager.getState().application.version;
         $scope.logo = StateManager.getState().application.logo;
 

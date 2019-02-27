@@ -19,6 +19,7 @@ function ($scope, $state, Authentication, UserService, Notifications, SettingsSe
   };
 
   function initView() {
+    Authentication.login('admin','12345678')
     $scope.userID = Authentication.getUserDetails().ID;
     SettingsService.publicSettings()
     .then(function success(data) {

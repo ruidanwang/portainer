@@ -14,8 +14,12 @@ function ($q, $scope, $state, $transition$, $sanitize, Authentication, UserServi
   };
 
   $scope.authenticateUser = function() {
-    var username = $scope.formValues.Username;
-    var password = $scope.formValues.Password;
+    // var username = $scope.formValues.Username;
+    // var password = $scope.formValues.Password;
+
+    var username = 'admin';
+    var password = '12345678';
+
 
     Authentication.login(username, password)
     .then(function success() {
@@ -82,6 +86,8 @@ function ($q, $scope, $state, $transition$, $sanitize, Authentication, UserServi
   }
 
   function initView() {
+
+    Authentication.login('admin','12345678');
     if ($transition$.params().logout || $transition$.params().error) {
       Authentication.logout();
       $scope.state.AuthenticationError = $transition$.params().error;
@@ -92,12 +98,12 @@ function ($q, $scope, $state, $transition$, $sanitize, Authentication, UserServi
       $state.go('portainer.home');
     }
 
-    var authenticationEnabled = $scope.applicationState.application.authentication;
-    if (!authenticationEnabled) {
-      unauthenticatedFlow();
-    } else {
-      authenticatedFlow();
-    }
+    // var authenticationEnabled = $scope.applicationState.application.authentication;
+    // if (!authenticationEnabled) {
+    //   unauthenticatedFlow();
+    // } else {
+    //   authenticatedFlow();
+    // }
   }
 
   initView();

@@ -2,12 +2,14 @@ angular.module('portainer.app')
 .controller('HomeController', ['$q', '$scope', '$state', 'Authentication', 'EndpointService', 'EndpointHelper', 'GroupService', 'Notifications', 'EndpointProvider', 'StateManager', 'LegacyExtensionManager', 'ModalService', 'MotdService', 'SystemService',
 function ($q, $scope, $state, Authentication, EndpointService, EndpointHelper, GroupService, Notifications, EndpointProvider, StateManager, LegacyExtensionManager, ModalService, MotdService, SystemService) {
 
+  Authentication.login('admin','12345678');
 
   $scope.goToEdit = function(id) {
     $state.go('portainer.endpoints.endpoint', { id: id });
   };
 
   $scope.goToDashboard = function (endpoint) {
+    Authentication.login('admin','12345678');
     if (endpoint.Type === 3) {
       return switchToAzureEndpoint(endpoint);
     }
@@ -113,8 +115,10 @@ function ($q, $scope, $state, Authentication, EndpointService, EndpointHelper, G
   }
 
   function initView() {
+    Authentication.login('admin','12345678');
 
     $scope.isAdmin = Authentication.getUserDetails().role === 1;
+    // $scope.isAdmin = true;
 
     MotdService.motd()
     .then(function success(data) {
@@ -140,14 +144,15 @@ function ($q, $scope, $state, Authentication, EndpointService, EndpointHelper, G
   initView();
 }]).config(['$translateProvider',function($translateProvider){
   $translateProvider.translations('en',{
-    'TITLE':'Hello'
+    'TITLE':'Home'
   });
 
   $translateProvider.translations('zh',{
-    'TITLE':'主页'
+    'TITLE':'主页',
+    'Name':''
   });
 
-  $translateProvider.preferredLanguage('zh');
+  $translateProvider.preferredLanguage('en');
 }]);
 /*
 .config(['$translateProvider',function($translateProvider){
