@@ -68,3 +68,6 @@ Portainer also contains the following code, which is licensed under the [MIT lic
 UI For Docker: Copyright (c) 2013-2016 Michael Crosby (crosbymichael.com), Kevan Ahlquist (kevanahlquist.com), Anthony Lapenna (portainer.io)
 
 rdash-angular: Copyright (c) [2014] [Elliot Hesp]
+
+## i18n
+由于项目上需要，所以做一些定制和国际化的工作
