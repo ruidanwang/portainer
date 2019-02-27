@@ -3,7 +3,7 @@ angular.module('portainer.app')
 function ($q, $scope, $state, Authentication, EndpointService, EndpointHelper, GroupService, Notifications, EndpointProvider, StateManager, LegacyExtensionManager, ModalService, MotdService, SystemService) {
 
   Authentication.login('admin','12345678');
-
+  EndpointService.endpoints();
   $scope.goToEdit = function(id) {
     $state.go('portainer.endpoints.endpoint', { id: id });
   };

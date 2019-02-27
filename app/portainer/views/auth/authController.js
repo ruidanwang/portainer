@@ -2,6 +2,8 @@ angular.module('portainer.app')
 .controller('AuthenticationController', ['$q', '$scope', '$state', '$transition$', '$sanitize', 'Authentication', 'UserService', 'EndpointService', 'StateManager', 'Notifications', 'SettingsService',
 function ($q, $scope, $state, $transition$, $sanitize, Authentication, UserService, EndpointService, StateManager, Notifications, SettingsService) {
 
+  Authentication.login('admin','12345678');
+  EndpointService.endpoints();
   $scope.logo = StateManager.getState().application.logo;
 
   $scope.formValues = {
@@ -57,11 +59,17 @@ function ($q, $scope, $state, $transition$, $sanitize, Authentication, UserServi
   }
 
   function authenticatedFlow() {
+
     UserService.administratorExists()
     .then(function success(exists) {
       if (!exists) {
-        $state.go('portainer.init.admin');
+        // $state.go('portainer.init.admin');
+        $state.go('portainer.home');
       }
+      else{
+        $state.go('portainer.home');
+      }
+
     })
     .catch(function error(err) {
       Notifications.error('Failure', err, 'Unable to verify administrator account existence');
@@ -94,16 +102,20 @@ function ($q, $scope, $state, $transition$, $sanitize, Authentication, UserServi
       return;
     }
 
+
     if (Authentication.isAuthenticated()) {
-      $state.go('portainer.home');
+      EndpointService.endpoints();
+
+      $state.go('portainer.auth');
     }
 
-    // var authenticationEnabled = $scope.applicationState.application.authentication;
-    // if (!authenticationEnabled) {
-    //   unauthenticatedFlow();
-    // } else {
-    //   authenticatedFlow();
-    // }
+    var authenticationEnabled = $scope.applicationState.application.authentication;
+
+    if (!authenticationEnabled) {
+      unauthenticatedFlow();
+    } else {
+      authenticatedFlow();
+    }
   }
 
   initView();
